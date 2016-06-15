@@ -1,8 +1,10 @@
-site_name: LSCC Documentation
+site_name: GCC2016 Documentation
 theme: cerulean
 pages:
 - 'Home': 'index.md'
-- 'Tutorials':
+- 'GCC2016':
+  - 'GCC2016 RNA-seq': 'tutorials/rna_seq_dge_advanced/rna_seq_gcc2016.md'
+- 'Other Tutorials':
   - 'Overview': 'tutorials/index.md'
   - 'NGS Overview': 'tutorials/ngs_overview/NGS_Overview.md'
   - 'Using Git and Github for revision control': 'tutorials/using_git/Using_Git.md'
@@ -35,8 +37,6 @@ pages:
   - 'Introduction to GenomeSpace' : 'tutorials/genomespace/genomespace.md'
 - 'Protocols':
   - 'De Novo Genome Assembly for Illumina Data': 'tutorials/assembly/assembly-protocol.md'
-- 'GCC2016':
-  - 'GCC2016 RNA-seq': 'tutorials/rna_seq_dge_advanced/rna_seq_gcc2016.md'
 extra_templates: [
   'tutorials/hpc/slides.html',
   'tutorials/unix/slides.html',

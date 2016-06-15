@@ -1,7 +1,11 @@
 ![VLSCI Logo](img/vlsci_logo.gif)
 
-# LSCC Documentation
+# GCC2016 Documentation
 
-## Contents
+### Contents
 
-* [Tutorials and Protocols](tutorials/index.md)
+* [Human Variant Calling with Galaxy]()
+* [RNA-seq Analysis with Galaxy Using Advanced Workflows](tutorials/rna_seq_dge_advanced/rna_seq_gcc2016.md)
+* [Small Genomes de novo Assembly and Scaffolding]()
+* [Small Genome Annotation]()
+
