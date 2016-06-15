@@ -35,6 +35,8 @@ pages:
   - 'Introduction to GenomeSpace' : 'tutorials/genomespace/genomespace.md'
 - 'Protocols':
   - 'De Novo Genome Assembly for Illumina Data': 'tutorials/assembly/assembly-protocol.md'
+- 'GCC2016':
+  - 'GCC2016 RNA-seq': 'tutorials/rna_seq_dge_advanced/rna_seq_gcc2016.md'
 extra_templates: [
   'tutorials/hpc/slides.html',
   'tutorials/unix/slides.html',
