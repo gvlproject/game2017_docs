@@ -3,7 +3,8 @@ theme: cerulean
 pages:
 - 'Home': 'index.md'
 - 'GCC2016':
-  - 'GCC2016 RNA-seq': 'tutorials/rna_seq_dge_advanced/rna_seq_gcc2016.md'
+  - 'RNA-seq Analysis': 'tutorials/rna_seq_dge_advanced/rna_seq_gcc2016.md'
+  - 'Variant Calling': 'tutorials/var_detect_advanced/var_calling_gcc2016.md'
 - 'Other Tutorials':
   - 'Overview': 'tutorials/index.md'
   - 'NGS Overview': 'tutorials/ngs_overview/NGS_Overview.md'
