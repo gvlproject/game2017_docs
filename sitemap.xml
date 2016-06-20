@@ -4,7 +4,7 @@
     
     <url>
      <loc>None/</loc>
-     <lastmod>2016-06-15</lastmod>
+     <lastmod>2016-06-20</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -13,7 +13,13 @@
         
     <url>
      <loc>None/tutorials/rna_seq_dge_advanced/rna_seq_gcc2016/</loc>
-     <lastmod>2016-06-15</lastmod>
+     <lastmod>2016-06-20</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
+     <loc>None/tutorials/var_detect_advanced/var_calling_gcc2016/</loc>
+     <lastmod>2016-06-20</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
@@ -23,79 +29,79 @@
         
     <url>
      <loc>None/tutorials/</loc>
-     <lastmod>2016-06-15</lastmod>
+     <lastmod>2016-06-20</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/tutorials/ngs_overview/NGS_Overview/</loc>
-     <lastmod>2016-06-15</lastmod>
+     <lastmod>2016-06-20</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/tutorials/using_git/Using_Git/</loc>
-     <lastmod>2016-06-15</lastmod>
+     <lastmod>2016-06-20</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/tutorials/gvl_launch/gvl_launch/</loc>
-     <lastmod>2016-06-15</lastmod>
+     <lastmod>2016-06-20</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/tutorials/galaxy_101/galaxy_101/</loc>
-     <lastmod>2016-06-15</lastmod>
+     <lastmod>2016-06-20</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/tutorials/galaxy-workflows/galaxy-workflows/</loc>
-     <lastmod>2016-06-15</lastmod>
+     <lastmod>2016-06-20</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/tutorials/rna_seq_dge_basic/rna_seq_basic_background/</loc>
-     <lastmod>2016-06-15</lastmod>
+     <lastmod>2016-06-20</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/tutorials/rna_seq_dge_basic/rna_seq_basic_tutorial/</loc>
-     <lastmod>2016-06-15</lastmod>
+     <lastmod>2016-06-20</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/tutorials/rna_seq_dge_advanced/rna_seq_advanced_tutorial/</loc>
-     <lastmod>2016-06-15</lastmod>
+     <lastmod>2016-06-20</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/tutorials/rna_seq_exp_design/rna_seq_experimental_design/</loc>
-     <lastmod>2016-06-15</lastmod>
+     <lastmod>2016-06-20</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/tutorials/hpc/</loc>
-     <lastmod>2016-06-15</lastmod>
+     <lastmod>2016-06-20</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/tutorials/unix/</loc>
-     <lastmod>2016-06-15</lastmod>
+     <lastmod>2016-06-20</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/tutorials/python_overview/python_overview/</loc>
-     <lastmod>2016-06-15</lastmod>
+     <lastmod>2016-06-20</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
@@ -107,7 +113,7 @@
         
     <url>
      <loc>None/tutorials/variant_calling_galaxy_1/variant_calling_galaxy_1/</loc>
-     <lastmod>2016-06-15</lastmod>
+     <lastmod>2016-06-20</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
@@ -125,7 +131,7 @@
         
     <url>
      <loc>None/tutorials/genomespace/genomespace/</loc>
-     <lastmod>2016-06-15</lastmod>
+     <lastmod>2016-06-20</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
@@ -135,7 +141,7 @@
         
     <url>
      <loc>None/tutorials/assembly/assembly-protocol/</loc>
-     <lastmod>2016-06-15</lastmod>
+     <lastmod>2016-06-20</lastmod>
      <changefreq>daily</changefreq>
     </url>
         

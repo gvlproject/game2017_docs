@@ -9,7 +9,7 @@
         
         <link rel="shortcut icon" href="../../../img/favicon.ico">
 
-	<title>Var detect advanced - GCC2016 Documentation</title>
+	<title>Variant Calling - GCC2016 Documentation</title>
 
         <link href="../../../css/bootstrap-custom.min.css" rel="stylesheet">
         <link href="../../../css/font-awesome-4.0.3.css" rel="stylesheet">
@@ -60,7 +60,7 @@
             
             
             
-                <li class="dropdown">
+                <li class="dropdown active">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">GCC2016 <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                     
@@ -68,8 +68,8 @@
                             <a href="../../rna_seq_dge_advanced/rna_seq_gcc2016/">RNA-seq Analysis</a>
                         </li>
                     
-                        <li >
-                            <a href="../var_calling_gcc2016/">Variant Calling</a>
+                        <li class="active">
+                            <a href="./">Variant Calling</a>
                         </li>
                     
                     </ul>
@@ -77,7 +77,7 @@
             
             
             
-                <li class="dropdown active">
+                <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Other Tutorials <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                     
@@ -141,7 +141,7 @@
                             <a href="../../variant_calling_galaxy_1/variant_calling_galaxy_1/">Introduction to Variant Calling using Galaxy</a>
                         </li>
                     
-                        <li class="active">
+                        <li >
                             <a href="">Variant Detection Advanced</a>
                         </li>
                     
@@ -175,12 +175,12 @@
             <!-- Search, Navigation and Repo links -->
             <ul class="nav navbar-nav navbar-right">
                 <li >
-                    <a rel="next" href="../../variant_calling_galaxy_1/variant_calling_galaxy_1/">
+                    <a rel="next" href="../../rna_seq_dge_advanced/rna_seq_gcc2016/">
                         <i class="fa fa-arrow-left"></i> Previous
                     </a>
                 </li>
                 <li >
-                    <a rel="prev" href="../var_detect_advanced_background/">
+                    <a rel="prev" href="../../">
                         Next <i class="fa fa-arrow-right"></i>
                     </a>
                 </li>
@@ -194,27 +194,31 @@
             <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
     
-        <li class="main active"><a href="#variant-detection-advanced-workshop">Variant Detection - Advanced Workshop</a></li>
+        <li class="main active"><a href="#human-variant-calling-with-galaxy-workshop">Human Variant Calling with Galaxy Workshop</a></li>
         
             <li><a href="#tutorial-overview">Tutorial Overview</a></li>
+        
+            <li><a href="#learning-objectives">Learning Objectives</a></li>
         
             <li><a href="#background">Background</a></li>
         
             <li><a href="#preparation">Preparation</a></li>
         
-            <li><a href="#section-1-quality-control">Section 1: Quality Control</a></li>
+            <li><a href="#section-1-quality-control">Section 1. Quality Control</a></li>
         
-            <li><a href="#section-2-alignment-and-depth-of-coverage">Section 2: Alignment and depth of coverage</a></li>
+            <li><a href="#section-2-alignment">Section 2. Alignment</a></li>
         
-            <li><a href="#section-3-local-realignment">Section 3. Local realignment</a></li>
+            <li><a href="#section-3-depth-of-coverage">Section 3. Depth of Coverage</a></li>
         
-            <li><a href="#section-4-calling-variants-with-freebayes">Section 4. Calling variants with FreeBayes</a></li>
+            <li><a href="#section-4-local-realignment">Section 4. Local realignment</a></li>
         
-            <li><a href="#section-5-calling-variants-with-gatk-unified-genotyper">Section 5. Calling variants with GATK Unified Genotyper</a></li>
+            <li><a href="#section-5-calling-variants-with-freebayes">Section 5. Calling variants with FreeBayes</a></li>
         
-            <li><a href="#section-6-evaluate-variants">Section 6. Evaluate variants</a></li>
+            <li><a href="#section-6-calling-variants-with-gatk-unified-genotyper">Section 6. Calling variants with GATK Unified Genotyper</a></li>
         
-            <li><a href="#section-7-annotation">Section 7. Annotation</a></li>
+            <li><a href="#section-7-evaluate-variants">Section 7. Evaluate variants</a></li>
+        
+            <li><a href="#section-8-annotation">Section 8. Annotation</a></li>
         
     
     </ul>
@@ -226,22 +230,31 @@
 <a href=http://genome.edu.au><img src="../media/gvl_logo.jpg" alt="GVL logo" align="right" width="112"/></a><br></br><br></br>
 <br></br></p>
 
-<p> </p>
-
-<h1 id="variant-detection-advanced-workshop">Variant Detection - Advanced Workshop</h1>
+<h1 id="human-variant-calling-with-galaxy-workshop">Human Variant Calling with Galaxy Workshop</h1>
 <h2 id="tutorial-overview">Tutorial Overview</h2>
 <p>In this tutorial, we will look further at variant calling from sequence data. We will:</p>
 <ul>
-<li>Align NGS read data to a reference genome and perform variant calling, using somewhat different tools to those in the Basic workshop</li>
+<li>Align NGS read data to a reference genome and perform variant calling</li>
 <li>Carry out local realignment on our aligned reads</li>
 <li>Compare the performance of different variant calling tools</li>
 <li>Annotate our called variants with reference information</li>
 </ul>
+<hr />
+<h2 id="learning-objectives">Learning Objectives</h2>
+<p>At the end of this tutorial you should:</p>
+<ul>
+<li>Be familiar with PHRED quality base scores and understand why base calling
+   accuracy is important for variant calling</li>
+<li>Be able to align raw reads and process the alignment into a VCF (variant
+   call format) file containing identified variants</li>
+<li>Be able to evaluate variants and annotate a list of SNVs with SnpEff</li>
+</ul>
+<hr />
 <h2 id="background">Background</h2>
 <p>Some background reading and reference material can be found <a href="../var_detect_advanced_background/">here</a>.</p>
-<p>The slides used in this workshop can be found <a href="https://docs.google.com/presentation/d/1gsoS-ec1kCS7gBxLD4VAevhEMSsMA7TU7S8ZC_fzyEE/pub?start=false&amp;loop=false&amp;delayms=10000&amp;slide=id.gd138ad700_0_0">here</a>.</p>
 <p><strong>Where is the data in this tutorial from?</strong></p>
 <p>The data has been produced from human whole genomic DNA. Only reads that have mapped to a part of chromosome 20 have been used, to make the data suitable for an interactive tutorial. There are about one million 100bp reads in the dataset, produced on an Illumina HiSeq2000. This data was generated as part of the 1000 Genomes project: http://www.1000genomes.org/</p>
+<hr />
 <h2 id="preparation">Preparation</h2>
 <ol>
 <li>
@@ -301,7 +314,7 @@ https://swift.rc.nectar.org.au:8888/v1/AUTH_377/public/variantCalling_ADVNCD/dbS
 </ul>
 </li>
 </ol>
-<h2 id="section-1-quality-control">Section 1: Quality Control</h2>
+<h2 id="section-1-quality-control">Section 1. Quality Control</h2>
 <p>The aim here is to evaluate the quality of the short data. If the quality is poor, then adjustments can be made - eg trimming the short reads, or adjusting your expectations of the final outcome!</p>
 <ol>
 <li><strong>Analyse the quality of the reads in the FASTQ file.</strong><ul>
@@ -312,7 +325,7 @@ https://swift.rc.nectar.org.au:8888/v1/AUTH_377/public/variantCalling_ADVNCD/dbS
 </li>
 </ol>
 <p>Look at the generated FastQC metrics. This data looks pretty good - high per-base quality scores (most above 30).</p>
-<h2 id="section-2-alignment-and-depth-of-coverage">Section 2: Alignment and depth of coverage</h2>
+<h2 id="section-2-alignment">Section 2. Alignment</h2>
 <p>In this step we map each of the individual reads in the sample FASTQ readsets to a reference genome, so that we will be able to identify the sequence changes with respect to the reference genome.</p>
 <p>Some of the variant callers need extra information regarding the source of reads in order to identify the correct error profiles to use in their statistical variant detection model, so we add more information into the alignment step so that that generated BAM file contains the metadata the variant caller expects.</p>
 <p>We will also examine the depth of coverage of the aligned reads across the genome, as a quality check on both the sequencing experiment and the alignment.</p>
@@ -336,7 +349,15 @@ https://swift.rc.nectar.org.au:8888/v1/AUTH_377/public/variantCalling_ADVNCD/dbS
 </ul>
 </li>
 <li>
-<p><strong>Visualise the aligned BAM file with IGV.</strong> The Integrated Genome Viewer, IGV, is a very popular tool for visualising aligned NGS data. It will run on your computer (not on the server).</p>
+<p>The workshop instructors will demonstrate how to use IGV to visualise reads from alignment.</p>
+</li>
+</ol>
+<div class="showable-container hint showable-hidden" id="showable0">
+<div class="showable-inner">
+<div class="showable-header hint" id="showabletitle0"><a href="" id="showablelink0">IGV Steps</a></div>
+<div class="showable-body hint" id="showablebody0">
+<p><strong>Visualise the aligned BAM file with IGV.</strong><br />
+The Integrated Genome Viewer, IGV, is a very popular tool for visualising aligned NGS data. It will run on your computer (not on the server).</p>
 <ul>
 <li><em>Note: if you are already familiar with IGV, you may want to go through this section quickly, but it's still a good idea to launch IGV for use in later steps.</em></li>
 <li>In the green dataset box for your BAM file in the history panel, you will see some <em>display with IGV</em> links. Launch IGV by clicking the <em>current</em> link. If IGV is already running on your computer, instead click the <em>local</em> link. If you have problems you can instead launch IGV by visiting https://www.broadinstitute.org/software/igv/download.</li>
@@ -350,7 +371,20 @@ https://swift.rc.nectar.org.au:8888/v1/AUTH_377/public/variantCalling_ADVNCD/dbS
 <li>Zoom in to the left hand end of chromosome 20 to see the read alignments - remember our reads only cover the first 2mb of the chromosome.</li>
 <li>Scroll around and zoom in and out in the IGV genome viewer to get a feel for genomic data. Note that coverage is variable, with some regions getting almost no coverage (e.g. try chr20:1,870,686-1,880,895 - if you zoom right in to base resolution you’ll see that this region is very GC rich, meaning it’s hard to sequence. Unfortunately it also contains the first few exons of a gene...)</li>
 </ul>
-</li>
+</div>
+</div>
+</div>
+<script>(function(w,d,u){w.readyQ=[];w.bindReadyQ=[];function p(x,y){if(x=="ready"){w.bindReadyQ.push(y);}else{w.readyQ.push(x);}};var a={ready:p,bind:p};w.$=w.jQuery=function(f){if(f===d||f===u){return a}else{p(f)}}})(window,document)</script>
+<script>
+    $(document).ready(function(){
+        $("#showablelink0").click(function(e){
+            e.preventDefault();
+            $("#showable0").toggleClass("showable-hidden");
+        });
+    });
+    </script>
+<h2 id="section-3-depth-of-coverage">Section 3. Depth of Coverage</h2>
+<ol>
 <li>
 <p><strong>Restrict the genomic region considered.</strong> Later steps can be computationally intensive if performed on the entire genome. We will generate a genomic interval (BED) file that we will use to restrict further analyses to the first 2mb of chromosome 20, as we know our data comes from this region.</p>
 <ul>
@@ -367,7 +401,8 @@ https://swift.rc.nectar.org.au:8888/v1/AUTH_377/public/variantCalling_ADVNCD/dbS
 </ul>
 </li>
 <li>
-<p><strong>Evaluate the depth of coverage of the aligned region.</strong> Under <em>NGS COMMON TOOLSETS</em>, select the tool <em>NGS: GATK Tools 2.8 -&gt; Depth of Coverage</em>.</p>
+<p><strong>Evaluate the depth of coverage of the aligned region.</strong><br />
+    Under <em>NGS COMMON TOOLSETS</em>, select the tool <em>NGS: GATK Tools 2.8 -&gt; Depth of Coverage</em>.</p>
 <ul>
 <li>Select the BAM file you just generated as the input BAM file.</li>
 <li>Make sure the reference genome we aligned to is selected under <em>Using reference genome</em>.</li>
@@ -384,7 +419,7 @@ https://swift.rc.nectar.org.au:8888/v1/AUTH_377/public/variantCalling_ADVNCD/dbS
 </ul>
 </li>
 </ol>
-<h2 id="section-3-local-realignment">Section 3. Local realignment</h2>
+<h2 id="section-4-local-realignment">Section 4. Local realignment</h2>
 <p>Alignment to large genomes is a compromise between speed and accuracy. Since we usually have (at least) millions of reads, it becomes computationally too expensive to compare reads to one another - instead, high-throughput aligners such as Bowtie align each read individually to the reference genome.</p>
 <p>This is often a problem where indels are present, as the aligner will be reluctant to align a read over an indel without sufficient evidence. This can lead to misalignment and to false positive SNVs. We can improve the performance of variant callers by carrying out a further step of ‘realignment’ after the initial alignment, considering all the reads in a particular genomic region collectively. In particular, this can provide enough collective evidence to realign reads correctly over suspected indels.</p>
 <p>Both GATK and FreeBayes will benefit from local realignment around indels. Some tools, such as SamTools Mpileup, have alternative methods to deal with possible misalignment around indels.</p>
@@ -413,17 +448,33 @@ However performing local realignment will improve the accuracy of our variant ca
 </ul>
 </li>
 <li>
+<p>The workshop instructors will demonstrate how to visualise and compare the two bam files using IGV.</p>
+</li>
+</ol>
+<div class="showable-container hint showable-hidden" id="showable1">
+<div class="showable-inner">
+<div class="showable-header hint" id="showabletitle1"><a href="" id="showablelink1">IGV Steps</a></div>
+<div class="showable-body hint" id="showablebody1">
 <p><strong>Compare the realigned BAM file to original BAM around an indel.</strong></p>
 <ul>
 <li>Open the realigned BAM file in IGV. You can use the <em>local</em> link to open it in your already-running IGV session and compare it to the pre-realignment BAM file.</li>
 <li>Generally, the new BAM should appear identical to the old BAM except in the realigned regions.</li>
 <li>Find some regions with indels that have been realigned (use the ‘Realigner Target Creator on data... (GATK intervals)’ file from the first step of realignment, it has a list of the realigned regions).</li>
 <li>If you can’t find anything obvious, check region chr20:1163914-1163954;
-you should see that realignment has resulted in reads originally providing evidence of a ‘G/C’ variant at chr20:1163937 to be realigned with a 10bp insertion at chr20:1163835 and no evidence of the variant.</li>
+you should see that realignment has resulted in reads originally providing evidence of a ‘G/C’ variant at chr20:1163937 to be realigned with a 10bp insertion at chr20:1163935 and no evidence of the variant.</li>
 </ul>
-</li>
-</ol>
-<h2 id="section-4-calling-variants-with-freebayes">Section 4. Calling variants with FreeBayes</h2>
+</div>
+</div>
+</div>
+<script>
+    $(document).ready(function(){
+        $("#showablelink1").click(function(e){
+            e.preventDefault();
+            $("#showable1").toggleClass("showable-hidden");
+        });
+    });
+    </script>
+<h2 id="section-5-calling-variants-with-freebayes">Section 5. Calling variants with FreeBayes</h2>
 <p>FreeBayes is a Bayesian variant caller which assesses the likelihood of each possible genotype for each position in the reference genome, given the observed reads at that position, and reports back the list of variants (positions where a genotype different to homozygous reference was called). It  can be set to aggressively call all possible variants, leaving filtering to the user. FreeBayes generates a variant quality score (as do all variant callers) which can be used for filtering. FreeBayes will also give some phasing information, indicating when nearby variants appear to be on the same chromosome.</p>
 <p>You can <a href="https://github.com/ekg/freebayes">read more about FreeBayes here</a>.</p>
 <ol>
@@ -442,11 +493,10 @@ you should see that realignment has resulted in reads originally providing evide
 <li>Click the eye icon to examine the VCF file contents.</li>
 <li>How many variants exactly are in your list? (Hint: you can look at the number of lines in the dataset, listed in the green box in the History, but remember the top lines are header lines.)</li>
 <li>What sort of quality scores do your variants have?</li>
-<li>Open the VCF file in IGV using the dataset's <em>display in IGV local</em> link (using the <em>current</em> link will open IGV again, and using <em>local</em> should use your already-running IGV). This will give an annotation track in IGV to visualise where variants have been called. Compare it to your BAM file.</li>
 </ul>
 </li>
 </ol>
-<h2 id="section-5-calling-variants-with-gatk-unified-genotyper">Section 5. Calling variants with GATK Unified Genotyper</h2>
+<h2 id="section-6-calling-variants-with-gatk-unified-genotyper">Section 6. Calling variants with GATK Unified Genotyper</h2>
 <p>For comparison, we will call variants with a second variant caller.</p>
 <p>The GATK (genome analysis toolkit) is a set of tools from the Broad Institute. It includes the tools for local realignment, used in the previous step.</p>
 <p>The GATK UnifiedGenotyper is a Bayesian variant caller and genotyper. You can also use the GATK HaplotypeCaller, which should be available on the GVL server you are using. It takes a little longer to run but is a more recent and sophisticated variant caller that takes into account human haplotype information. Both of these tools are intended primarily for calling diploid, germline variants.</p>
@@ -457,7 +507,7 @@ you should see that realignment has resulted in reads originally providing evide
 <ul>
 <li>Select your realigned BAM file as input, and select the correct reference genome.</li>
 <li>UnifiedGenotyper can automatically label called variants that correspond to known human SNPs, if we provide it with a list of these. We have a VCF file of known SNPs which you imported as input data for this workshop. Under <em>dbSNP ROD file</em>, select the dataset <em>dbsnp135_excludingsitesafter129_chr20.vcf</em>.</li>
-<li>Set <em>Genotype likelihoods calculation model to employ</em> to <em>SNP</em>.</li>
+<li>Set <em>Genotype likelihoods calculation model to employ</em> to <em>BOTH</em>.</li>
 <li>Restrict the analysis to only the region of interest: Set <em>Basic or Advanced GATK options</em> to <em>Advanced</em>. Click <em>Insert Operate on Genomic intervals</em> to add a new region and select the chr20_2mb.bed file from your history.</li>
 <li><em>Execute</em>.</li>
 <li>Rename the file to something useful eg <strong>NA12878.GATK.chr20_2mb.vcf</strong>.</li>
@@ -470,12 +520,10 @@ you should see that realignment has resulted in reads originally providing evide
 <li>Roughly how many variants are there in your VCF file (how many lines in the dataset?)</li>
 <li>Click the eye icon to examine the contents of the VCF file. Notice that the <em>ID</em> column (the third column) is populated with known SNP IDs from the VCF file we provided.</li>
 <li>Notice that the VCF header rows, and the corresponding information in the <em>INFO</em> column, is NOT the same as for the VCF file generated by FreeBayes. In general each variant caller gets to decide what information to put in the <em>INFO</em> column, so long as it adds header rows to describe the fields it uses.</li>
-<li>Open the VCF file in IGV, using the link in the history panel.</li>
-<li>Find a region where GATK has called a variant but FreeBayes hasn’t, and vice versa. Try chr20:1,123,714-1,128,378.</li>
 </ul>
 </li>
 </ol>
-<h2 id="section-6-evaluate-variants">Section 6. Evaluate variants</h2>
+<h2 id="section-7-evaluate-variants">Section 7. Evaluate variants</h2>
 <p>How can we evaluate our variants?</p>
 <p>We've called variants on normal human DNA, so we expect to find variants with the typical characteristics of human germline variants. We know a lot about variation in humans from many empirical studies, including the 1000Genomes project, so we have some expectations on what we should see when we call variants in a new sample:</p>
 <ul>
@@ -568,7 +616,7 @@ you should see that realignment has resulted in reads originally providing evide
 </ul>
 </li>
 </ol>
-<h2 id="section-7-annotation">Section 7. Annotation</h2>
+<h2 id="section-8-annotation">Section 8. Annotation</h2>
 <p>The variants we have detected can be annotated with information from known reference data. This can include, for instance</p>
 <ul>
 <li>whether the variant corresponds to a previously-observed variant in other samples, or across the population</li>
