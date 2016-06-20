@@ -1,4 +1,8 @@
-# LSCC Documentation
+# GCC 2016 Documentation
+
+Tutorial documents for Galaxy Community Conference 2016 workshops.
+
+Accessible at [gvlproject.github.io/gcc2016_docs/](http://gvlproject.github.io/gcc2016_docs/)
 
 ## How to build the documentation
 
