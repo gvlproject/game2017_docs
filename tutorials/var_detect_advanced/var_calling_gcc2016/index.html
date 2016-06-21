@@ -253,7 +253,7 @@
 <h2 id="background">Background</h2>
 <p>Some background reading and reference material can be found <a href="../var_detect_advanced_background/">here</a>.</p>
 <p><strong>Where is the data in this tutorial from?</strong></p>
-<p>The data has been produced from human whole genomic DNA. Only reads that have mapped to a part of chromosome 20 have been used, to make the data suitable for an interactive tutorial. There are about one million 100bp reads in the dataset, produced on an Illumina HiSeq2000. This data was generated as part of the 1000 Genomes project: http://www.1000genomes.org/</p>
+<p>The data has been produced from human whole genomic DNA. Only reads that have mapped to a part of chromosome 20 have been used, to make the data suitable for an interactive tutorial. There are about 250,000 100bp reads in the dataset, produced on an Illumina HiSeq2000. This data was generated as part of the 1000 Genomes project: http://www.1000genomes.org/</p>
 <hr />
 <h2 id="preparation">Preparation</h2>
 <ol>
@@ -534,6 +534,11 @@ you should see that realignment has resulted in reads originally providing evide
 <p>You can <a href="http://genome.sph.umich.edu/wiki/SNP_Call_Set_Properties">read more about SNP call set properties here</a>.</p>
 <p>You may find that each of the variant callers has more variants than we would have expected - we would have expected around 2000 in our 2 megabase region but we see between 3000 and 5000. This is normal for variant calling, where most callers err on the side of sensitivity to reduce false negatives (missed SNVs), expecting the user to do further filtering to remove false positives (false SNVs).</p>
 <p>We will also compare the output of our variant callers to one another - how many SNVs have they called in common? How many do they disagree on?</p>
+<p>The workshop instructors will demo how to use GATK Eval Variants.</p>
+<div class="showable-container hint showable-hidden" id="showable2">
+<div class="showable-inner">
+<div class="showable-header hint" id="showabletitle2"><a href="" id="showablelink2">If you want, here are the instructions so you can run GATK Eval Variants yourself.</a></div>
+<div class="showable-body hint" id="showablebody2">
 <ol>
 <li>
 <p><strong>Evaluate dbSNP concordance and Ti/Tv ratio using the GATK VariantEval tool.</strong></p>
@@ -612,10 +617,20 @@ you should see that realignment has resulted in reads originally providing evide
 <li>"FreeBayes ∩ UnifiedGenotyper" indicates the intersection, i.e. how many variants were called by both variant callers.</li>
 </ul>
 </li>
-<li>You will probably find that FreeBayes calls variants more aggressively, and that there are more variants called by FreeBayes and not UnifiedGenotyper than vice versa. We could make FreeBayes calls more specific by filtering on e.g. variant quality score. We'd expect this to  remove many false positives, but also a few true positives.</li>
 </ul>
 </li>
 </ol>
+</div>
+</div>
+</div>
+<script>
+    $(document).ready(function(){
+        $("#showablelink2").click(function(e){
+            e.preventDefault();
+            $("#showable2").toggleClass("showable-hidden");
+        });
+    });
+    </script>
 <h2 id="section-8-annotation">Section 8. Annotation</h2>
 <p>The variants we have detected can be annotated with information from known reference data. This can include, for instance</p>
 <ul>
