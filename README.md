@@ -1,8 +1,8 @@
-# GCC 2016 Documentation
+# GAMe2017 Documentation
 
-Tutorial documents for Galaxy Community Conference 2016 workshops.
+Tutorial documents for the Galaxy Australasia Meeting 2017 workshops.
 
-Accessible at [gvlproject.github.io/gcc2016_docs/](http://gvlproject.github.io/gcc2016_docs/)
+Accessible at [gvlproject.github.io/game2017_docs/](http://gvlproject.github.io/game2017_docs/)
 
 ## How to build the documentation
 

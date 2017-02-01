@@ -1,10 +1,10 @@
-site_name: GCC2016 Documentation
+site_name: GAMe2017 Documentation
 theme: cerulean
 pages:
 - 'Home': 'index.md'
-- 'GCC2016':
-  - 'RNA-seq Analysis': 'tutorials/rna_seq_dge_advanced/rna_seq_gcc2016.md'
-  - 'Variant Calling': 'tutorials/var_detect_advanced/var_calling_gcc2016.md'
+- 'GAMe2017':
+  - 'RNA-seq Analysis': 'tutorials/rna_seq_dge_advanced/rna_seq_game2017.md'
+  - 'Variant Calling': 'tutorials/var_detect_advanced/var_calling_game2017.md'
 - 'Other Tutorials':
   - 'Overview': 'tutorials/index.md'
   - 'NGS Overview': 'tutorials/ngs_overview/NGS_Overview.md'
