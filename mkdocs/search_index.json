@@ -2,7 +2,7 @@
     "docs": [
         {
             "location": "/", 
-            "text": "GAMe2017 Documentation\n\n\nContents\n\n\n\n\nIntroduction to Galaxy\n\n\nBacterial Genome Assembly and Annotation in Galaxy\n\n\nRAD-Seq with Stacks in Galaxy\n\n\nRNA-seq Analysis in Galaxy\n\n\nHuman Variant Calling in Galaxy", 
+            "text": "GAMe2017 Documentation\n\n\nContents\n\n\n\n\nIntroduction to Galaxy\n\n\nBacterial Genome Assembly and Annotation in Galaxy\n\n\nAssembly using Velvet\n\n\nAssembly using Spades\n\n\nAnnotation using Prokka\n\n\n\n\n\n\nRAD-Seq with Stacks in Galaxy\n\n\nRNA-seq Analysis in Galaxy\n\n\nHuman Variant Calling in Galaxy", 
             "title": "Home"
         }, 
         {
@@ -12,7 +12,7 @@
         }, 
         {
             "location": "/#contents", 
-            "text": "Introduction to Galaxy  Bacterial Genome Assembly and Annotation in Galaxy  RAD-Seq with Stacks in Galaxy  RNA-seq Analysis in Galaxy  Human Variant Calling in Galaxy", 
+            "text": "Introduction to Galaxy  Bacterial Genome Assembly and Annotation in Galaxy  Assembly using Velvet  Assembly using Spades  Annotation using Prokka    RAD-Seq with Stacks in Galaxy  RNA-seq Analysis in Galaxy  Human Variant Calling in Galaxy", 
             "title": "Contents"
         }, 
         {
