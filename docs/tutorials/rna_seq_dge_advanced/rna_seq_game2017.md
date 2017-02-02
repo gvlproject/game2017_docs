@@ -37,7 +37,7 @@
 <img src="../media/vlsci_logo.jpg" height=100px>
 <img src="../media/gvl_logo.jpg" height=100px align=right>
 
-# GCC2016: RNA-Seq Differential Gene Expression Workshop
+# RNA-Seq Differential Gene Expression Workshop
 
 -----
 
@@ -89,10 +89,10 @@ as discussed in the optional extension section.
 
 ## Section 1: Preparation
 #### 1.  Register as a new user in Galaxy if you don’t already have an account
-1.  Open a browser and go to a Galaxy server. This can either be your
-    personal GVL server you [started previously](http://genome.edu.au/get/get#launch),
-    the public [Galaxy Tutorial server](http://galaxy-tut.genome.edu.au)
-    or the public [Galaxy Melbourne server](http://galaxy-mel.genome.edu.au).  
+1.  Open a browser and go to a Galaxy server. For this workshop we will be using
+    the server at [game-1.genome.edu.au](http://game-1.genome.edu.au/galaxy).
+    The public [Galaxy Melbourne server](http://galaxy-mel.genome.edu.au) can
+    also be used.
     Recommended browsers include Firefox and Chrome. Internet Explorer
     is not supported.
 2.  Register as a new user by clicking **User > Register** on the top
@@ -100,12 +100,14 @@ as discussed in the optional extension section.
     clicking **User > Login**.
 
 #### 2.  Import the RNA-seq data for the workshop.
-If you are using the public Galaxy Tutorial server or Galaxy Melbourne server,
+If you are using the public game-1 Galaxy server or Galaxy Melbourne server,
 you can import the data directly from Galaxy. You can do this by going to
 **Shared Data > Published Histories** on the top toolbar, and selecting
-the history called **RNA-Seq_Adv_Sec_1**. Then click on "Import History" on
+the history called **GAMe2017_RNA-seq_Start**. Then click on "Import History" on
 the top right and "start using this history" to switch to the newly imported
 history.
+
+\showable{Alternate instructions if you are using your own personal Galaxy server.}{hint}
 
 Alternatively, if you are using your own personal Galaxy server, you can import
 the data by:
@@ -155,30 +157,48 @@ the data by:
     <div class="code">
     https://swift.rc.nectar.org.au:8888/v1/AUTH_a3929895f9e94089ad042c9900e1ee82/RNAseqDGE_ADVNCD/genes.gtf
     </div>
-3.  You should now have these 13 files in your history:
-    - batch1_chrI_1.fastq
-    - batch1_chrI_2.fastq
-    - batch2_chrI_1.fastq
-    - batch2_chrI_2.fastq
-    - batch3_chrI_1.fastq
-    - batch3_chrI_2.fastq
-    - chem1_chrI_1.fastq
-    - chem1_chrI_2.fastq
-    - chem2_chrI_1.fastq
-    - chem2_chrI_2.fastq
-    - chem3_chrI_1.fastq
-    - chem3_chrI_2.fastq
-    - genes.gtf
 
-    These files can be renamed by clicking the **pen icon** if you wish.
+\endshowable
 
-    **Note:** The reads are paired end; for example batch1_chrI_1.fastq and
-    batch1_chrI_2.fastq are paired reads from one sequencing run. Low quality
-    reads have already been trimmed.
+You should now have these 13 files in your history:
+
+- batch1_chrI_1.fastq
+- batch1_chrI_2.fastq
+- batch2_chrI_1.fastq
+- batch2_chrI_2.fastq
+- batch3_chrI_1.fastq
+- batch3_chrI_2.fastq
+- chem1_chrI_1.fastq
+- chem1_chrI_2.fastq
+- chem2_chrI_1.fastq
+- chem2_chrI_2.fastq
+- chem3_chrI_1.fastq
+- chem3_chrI_2.fastq
+- genes.gtf
+
+These files can be renamed by clicking the **pen icon** if you wish.
+
+These 12 sequencing files are in FASTQ format and have the file
+extension: .fastq. If you are not familiar with the FASTQ format, [click
+here for an overview](https://en.wikipedia.org/wiki/FASTQ_format).  
+
+**Note:** The reads are paired end; for example batch1_chrI_1.fastq and
+batch1_chrI_2.fastq are paired reads from one sequencing run. Low quality
+reads have already been trimmed.
+
+Click on the **eye icon** to the top right of a FASTQ file to view the
+first part of the file.
+
+The gene annotation file (genes.gtf) is in GTF format. This file describes
+where the genes are located in the S. cerevisiae reference genome.
+Each feature is defined by a chromosomal start and end point, feature type (CDS, gene, exon etc),
+and parent gene and transcript.
+More information on the GTF format can be found
+[here](http://asia.ensembl.org/info/website/upload/gff.html).
 
 -----
 
-## Section 2: Alignment
+## Section 2: Alignment with TopHat
 
 In this section we map the reads in our FASTQ files to a reference genome. As
 these reads originate from mRNA, we expect some of them will cross exon/intron
@@ -221,7 +241,6 @@ built-in genome
 - Use defaults for the other fields
 - Execute
 
-
 \showable{Show screenshot}{hint}
 
 <img src="../media/rna_advanced_tophat.png" height=800px>
@@ -254,14 +273,34 @@ Rename the 6 accepted_hits files into a more meaningful name (e.g.
 by using the **pen icon** next to the file.
 
 #### 3.  Visualise the aligned reads with Trackster  
+Before we visualise our alignments in Trackster, we need to slightly modify our
+GTF file. The genes.gtf file for S. cerevisae (as downloaded from UCSC Table Browser)
+has a slightly different naming convention for one of the contigs (2-micron)
+than the reference genome used by Galaxy (2micron), which will cause an error to
+be thrown by Trackster if you try to add it. This is very typical of
+genomics currently! For this tutorial, we can fix this by removing the rows
+beginning with '2-micron' since we are only interested in chrI genes anyway.
+
+1.  In the left tool panel menu, under Filter and Sort, select
+    **Select lines that match an expression** and set the parameters as follows:
+    - **Select lines from:** genes.gtf
+    - **that:** Matching
+    - **the partern:** `^chrI\t`
+
+The result will be a GTF file only containing the features belonging to chrI.
+Rename this file to something like 'chrI_genes.gtf'.
+
+We can now visualise our data in Trackster.
+
 1.  On the top bar of Galaxy, select **Visualization > New Track Browser**.
 2.  Name your new visualization and select S. cerevisiae (sacCer2) as the
     reference genome build.
 3.  Click the **Add Datasets to Visualization** button and select
-    'batch1-accepted_hits.bam' and 'chem1-accepted_hits.bam' by using the
-    checkboxes on the left.
+    'batch1-accepted_hits.bam', 'chem1-accepted_hits.bam', and 'chrI_genes.gtf'
+    by using the checkboxes on the left.
 4.  Select chrI from the dropdown box. You can zoom in and out using the
-    buttons on the top toolbar.
+    buttons on the top toolbar. Can you find any genes that look differentially
+    expressed between the two BAM files?
 5.  You can also add more tracks using the **Add Tracks icon** located on the
     top right. Load one of the splice junction files such as 'Tophat on data 2
     and data 1: splice junctions'.
@@ -269,15 +308,6 @@ by using the **pen icon** next to the file.
     drop down list, click on the chromosomal position number
     display and specify the location **chrI:86985-87795** to view an
     intron junction.  
-
-Ideally we would add a gene model to the visualisation; but the
-genes.gtf file for S. cerevisae (as downloaded from UCSC Table Browser)
-has a slightly different naming convention for one of the chromosomes
-than the reference genome used by Galaxy, which will cause an error to
-be thrown by Trackster if you try to add it. This is very typical of
-genomics currently! If you are interested, you can fiddle with the
-genes.gtf file to rename the chromosome '2-micron' to '2micron', which
-will fix the problem.
 
 Before starting the next section, leave the Trackster interface and return
 to the analysis view of Galaxy by clicking 'Analyze Data' on the top
@@ -291,6 +321,17 @@ The aim in this section is to statistically test for differential expression
 using Cuffdiff and obtain a list of significant genes.
 
 #### 1.  Run Cuffdiff to identify differentially expressed genes and transcripts
+
+Cuffdiff takes a long time to run (even when using a subset of data) so in this
+workshop we'll be importing a history with finished Cuffdiff results.
+
+You can do this by going to **Shared Data > Published Histories** on the top
+toolbar, and selecting the history called **GAMe2017_RNA-seq_Cuffdiff**.
+Then click on "Import History" on the top right and "start using this history"
+to switch to the newly imported history.
+
+\showable{Show Cuffdiff instructions}{hint}
+
 In the left tool panel menu, under NGS Analysis, select
 **NGS: RNA Analysis > Cuffdiff** and set the parameters as follows:
 
@@ -313,6 +354,9 @@ In the left tool panel menu, under NGS Analysis, select
 - Use defaults for the other fields
 - Execute
 
+Note: This step may take a while, depending on how busy the server is.
+
+\endshowable
 
 \showable{Show screenshot}{hint}
 
@@ -320,27 +364,64 @@ In the left tool panel menu, under NGS Analysis, select
 
 \endshowable
 
-Note: This step may take a while, depending on how busy the server is.
 
 #### 2.  Explore the Cuffdiff output files
 
 There should be 11 output files from Cuffdiff. These files should all begin
-with something like "Cuffdiff on data 43, data 38, and others". We'll
-mostly be interested in the file ending with 'gene differential expression
-testing' which contains the statistical results from testing the level of
-gene expression between the batch condition and chem condition.
+with something like "Cuffdiff on data 43, data 38, and others".
 
-Filter based on column 14 (‘significant’) - a binary assessment of
-q_value > 0.05, where q_value is p_value adjusted for multiple testing.
-Under Basic Tools, click on **Filter and Sort > Filter**:
+**FPKM tracking files:**  
 
-- **Filter:** "Cuffdiff on data....: gene differential expression testing"
-- **With following condition:** c14=='yes'
-- Execute
+- transcript FPKM tracking
+- gene FPKM tracking
+- TSS groups FPKM tracking
+- CDS FPKM tracking  
 
-This will keep only those entries that Cuffdiff has marked as
-significantly differentially expressed. There should be 53 differentially
-expressed genes in this list.
+These 4 files contain the FPKM (a unit of normalised expression taking
+into account the transcript length for each transcript
+and the library size of the sample) for each of the two conditions.
+
+**Differential expression testing files:**  
+
+- gene differential expression testing
+- transcript differential expression testing
+- TSS groups differential expression testing
+- CDS FPKM differential expression testing
+- CDS overloading differential expression testing
+- promoters differential expression testing
+- splicing differential expression testing
+
+These 7 files contain the statistical
+results from testing the level of expression between the two conditions.
+
+1.  Examine the tables of normalised gene counts
+    View the Cuffdiff file "Cuffdiff on data x, data x, and others: gene FPKM
+    tracking" by clicking on the **eye icon**. The file consists of one row
+    for each gene from the reference transcriptome, with columns containing the
+    normalised read counts for each of the two conditions.
+    Note:  
+    - Cuffdiff gives each gene it’s own ‘tracking_id’, which equates
+      to a gene. Multiple transcription start sites are aggregated under a
+      single tracking_id.
+    - A gene encompasses a chromosomal locus which covers all the features
+      that make up that gene (exons, introns, 5’ UTR, etc).
+
+2.  Inspect the gene differential expression testing file
+    View the Cuffdiff file "Cuffdiff on data x, data x, and others: gene
+    differential expression testing" by clicking on the **eye icon**. The
+    columns of interest are: gene (c3), locus (c4), log2(fold_change) (c10),
+    p_value (c12), q_value (c13) and significant (c14).
+
+3.  Filter based on column 14 (‘significant’) - a binary assessment of
+    q_value > 0.05, where q_value is p_value adjusted for multiple testing.
+    Under Basic Tools, click on **Filter and Sort > Filter**:
+    - **Filter:** "Cuffdiff on data....: gene differential expression testing"
+    - **With following condition:** c14=='yes'
+    - Execute
+
+    This will keep only those entries that Cuffdiff has marked as
+    significantly differentially expressed. There should be 53 differentially
+    expressed genes in this list.
 
 We can rename this file by clicking on the **pencil icon** of
 the outputted file and change the name from "Filter on data x" to
@@ -348,14 +429,235 @@ the outputted file and change the name from "Filter on data x" to
 
 -----
 
-## Section 4: DESeq2 workflow
+## Section 4: Another workflow with HISAT2
+
+Now we've seen an example of a RNA-seq workflow using TopHat for alignment and
+Cuffdiff for quantification and analysis, we can try another workflow with
+more modern software.
+
+Start with a new history by importing the same history as before. Go to
+**Shared Data > Published Histories** on the top toolbar, and selecting
+the history called **GAMe2017_RNA-seq_Start**. Then click on "Import History" on
+the top right and "start using this history" to switch to the newly imported
+history.
+
+HISAT2 is a fast alignment program that is a successor to TopHat2. Running
+HISAT2 is similar to running TopHat.
+
+In the left tool panel menu, under NGS Analysis, select
+**NGS: RNA Analysis > HISAT2** and set the parameters as follows:  
+
+- **Input data format** FASTQ
+- **Single end or paired reads?** Individual paired reads
+- **Forward reads:**  
+(Click on the **multiple datasets icon** and select all six of the forward
+FASTQ files ending in \*1.fastq. This should be correspond to every
+second file (1,3,5,7,9,11). This can be done by holding down the
+ctrl key (Windows) or the command key (OSX) to select multiple files.)
+    - batch1_chrI_1.fastq
+    - batch2_chrI_1.fastq
+    - batch3_chrI_1.fastq
+    - chem1_chrI_1.fastq
+    - chem2_chrI_1.fastq
+    - chem3_chrI_1.fastq
+
+- **Reverse reads:**  
+(Click on the **multiple datasets icon** and select all six of the reverse
+FASTQ files ending in \*2.fastq.)  
+    - batch1_chrI_2.fastq
+    - batch2_chrI_2.fastq
+    - batch3_chrI_2.fastq
+    - chem1_chrI_2.fastq
+    - chem2_chrI_2.fastq
+    - chem3_chrI_2.fastq
+- **Source for the reference genome to align against:** Use
+built-in genome
+- **Select a reference genome:** S. cerevisiae June 2008 (SGD/SacCer2)
+(sacCer2)
+- Use defaults for the other fields
+- Execute
+
+HISAT2 outputs one bam file for each set of paired-end read files. Rename the 6
+files into a more meaningful name (e.g. 'HISAT on data 2 and data 1' to 'batch1.bam')
+by using the **pen icon** next to the file.
+
+-----
+
+## Section 5: Count reads in features
+
+HTSeq-count creates a count matrix using the number of the reads from each bam
+file that map to the genomic features in the genes.gtf. For each feature (a
+gene for example) a count matrix shows how many reads were mapped to this
+feature.
+
+1.  Use HTSeq-count to count the number of reads for each feature.  
+    In the left tool panel menu, under NGS Analysis, select
+    **NGS: RNA Analysis > SAM/BAM to count matrix** and set the parameters as follows:  
+    - **Gene model (GFF) file to count reads over from your current history:** genes.gtf
+    - **bam/sam file from your history:**  
+      (Select all six bam files using the shift key.)
+        - batch1.bam
+        - batch2.bam
+        - batch3.bam
+        - chem1.bam
+        - chem2.bam
+        - chem3.bam
+    - Use defaults for the other fields
+    - Execute
+
+2.  Examine the outputted matrix by using the **eye icon**.  
+    Each column corresponds to a sample and each row corresponds to a gene. By
+    sight, see if you can find a gene you think is differentially expressed
+    from looking at the counts.
+
+We now have a count matrix, with a count against each corresponding sample. We
+will use this matrix in later sections to calculate the differentially
+expressed genes.
+
+-----
+
+## Section 6: edgeR
+
+[edgeR](https://bioconductor.org/packages/release/bioc/html/edgeR.html)
+is an R package, that is used for analysing differential expression of
+RNA-Seq data and can either use exact statistical methods or generalised
+linear models.
+
+#### 1.  Generate a list of differentially expressed genes using edgeR
+In the Galaxy tool panel, under NGS Analysis, select
+**NGS: RNA > Differential_Count** and set the parameters as follows:
+
+- **Select an input matrix - rows are contigs, columns are counts for each
+  sample:** bams to DGE count matrix_htseqsams2mx.xls
+- **Title for job outputs:** Differential_Counts_edgeR
+- **Treatment Name:** Batch
+- **Select columns containing treatment:**  
+    - batch1.bam
+    - batch2.bam
+    - batch3.bam
+- **Control Name:** Chem
+- **Select columns containing control:**  
+    - chem1.bam
+    - chem2.bam
+    - chem3.bam
+- **Run this model using edgeR:** Run edgeR
+- Use defaults for the other fields
+- Execute
+
+#### 2.  Examine the outputs from the previous step
+1.  Examine the Differential_Counts_edgeR_topTable_edgeR.xls file by
+    clicking on the **eye icon**.
+    This file is a list of genes sorted by p-value from using EdgeR to
+    perform differential expression analysis.
+2.  Examine the Differential_Counts_edgeR.html file. This file has some
+    output logs and plots from running edgeR. If you are familiar with R,
+    you can examine the R code used for analysis by scrolling to the bottom
+    of the file, and clicking Differential_Counts.Rscript to download the
+    Rscript file.  
+    If you are curious about the statistical methods edgeR uses, you can
+    read the [edgeR user's guide at
+    Bioconductor](https://bioconductor.org/packages/release/bioc/html/edgeR.html).
+
+#### 3.  Extract the significant differentially expressed genes.  
+Under Basic Tools, click on **Filter and Sort > Filter**:
+
+- **Filter:** "Differential_Counts_edgeR_topTable_edgeR.xls"
+- **With following condition:** c6 < 0.05
+- Execute
+
+This will keep the genes that have an adjusted p-value of less
+than 0.05. There should be 55 genes in this file.
+Rename this file by clicking on the **pencil icon** of and change the name
+from "Filter on data x" to "edgeR_Significant_DE_Genes".
+
+-----
+
+## Section 7: Degust
+
+Degust is an interactive visualiser for analysing RNA-seq data. It runs as a
+web service and can be found at [vicbioinformatics.com/degust/](http://www.vicbioinformatics.com/degust/).
+
+<img src="../media/rna_advanced_degust_1.png" height=400px style="display:block; margin-left: auto; margin-right:auto;">
+
+#### 1. Load count data into Degust
+
+1.  In Galaxy, download the count data "bams to DGE count matrix_htseqsams2mx.xls"
+    generated in Section 5 using the **disk icon**.
+2.  Go to [vicbioinformatics.com/degust/](http://www.vicbioinformatics.com/degust/)
+    and click on "Upload your counts file".
+3.  Click "Choose file" and upload the recently downloaded Galaxy tabular file
+    containing your RNA-seq counts.
+
+#### 2. Configure your uploaded data
+
+1.  Give your visualisation a name.
+2.  For the Info column, select Contig.
+3.  Add two conditions: batch and chem. For each condition, select the three
+    samples which correspond with the condition.
+4.  Click **Save changes** and view your data.
+
+\showable{Show screenshot}{hint}
+
+<img src="../media/rna_advanced_degust_2.png" height=700px style="display:block; margin-left: auto; margin-right:auto;">
+
+\endshowable
+
+#### 3. Explore your data
+
+Read through the Degust tour of features. Explore the parallel coordinates plot,
+MA plot, MDS plot, heatmap and gene list. Each is fully interactive and
+influences other portions on the display depending on what is selected.
+
+<img src="../media/rna_advanced_degust_3.png" height=400px style="display:block; margin-left: auto; margin-right:auto;">
+
+On the right side of the page is an options module which can set thresholds to
+filter genes using statistical significance or absolute-fold-change.
+
+On the left side is a dropdown box you can specify the method (Voom/Limma or
+edgeR) used to perform differential expression analysis on the data. You can
+also view the R code by clicking "Show R code" under the options module on
+the right.
+
+#### 4. (Optional) Explore the demo data
+
+Degust also provides an example dataset with 4 conditions and more genes. You
+can play with the demo dataset by clicking on the "Try the demo" button on the
+Degust homepage. The demo dataset includes a column with an EC number for each
+gene. This means genes can be displayed on Kegg pathways using the module on
+the right.
+
+\showable{More info on PCA plots}{hint}
+
+PCA plots are useful for exploratory data analysis. Samples which are more
+similar to each other are expected to cluster together. A count matrix often
+has thousands of dimensions (one for each feature) and our PCA plot generated in
+the previous step transforms the data so the most variability is represented in principal
+components 1 and 2 (PC1 and PC2 represented by the x-axis and y-axis respectively).
+
+<img src="../media/rna_advanced_deseq2_pca.png" height=400px>
+
+Take note of the scales on the x-axis and the y-axis. The x-axis representing
+the first principal component accounts for 96% of the variance and ranges from
+approximately -6 to +6, while the y-axis ranges from approximately -1 to +1.
+
+For both conditions, the 3 replicates tend to be closer to each other than they are to replicates from the other condition.
+
+Additionally, within conditions, the lower glucose (chem) condition shows more
+variability between replicates than the higher glucose (batch) condition.
+
+\endshowable
+
+
+-----
+
+## Section 8: DESeq2 workflow
 
 The workshop instructors will demonstrate how to use DESeq2 for differential
 expression analysis.
 
 If you are interested in looking at the outputs, you can view the files by
 going to **Shared Data > Published Histories** on the top toolbar, and selecting
-the history called **GCC2016_RNA_workflow_2_DESeq2**. Then click on "Import History" on
+the history called **GAMe2017_RNA-seq_DESeq2**. Then click on "Import History" on
 the top right and "start using this history" to switch to the newly imported
 history.
 
@@ -376,6 +678,7 @@ ask an administrator to install htseq-count and DESeq2 via the Galaxy Tool Shed.
         - chem1-accepted_hits.bam
         - chem2-accepted_hits.bam
         - chem3-accepted_hits.bam
+    - **Stranded**: No
     - **ID Attribute:** gene_name
     - Use defaults for the other fields
     - Execute
@@ -416,96 +719,7 @@ from "Filter on data x" to "DESeq2_Significant_DE_Genes".
 
 -----
 
-## Section 5: Count reads in features
-
-HTSeq-count creates a count matrix using the number of the reads from each bam
-file that map to the genomic features in the genes.gtf. For each feature (a
-gene for example) a count matrix shows how many reads were mapped to this
-feature.
-
-1.  Use HTSeq-count to count the number of reads for each feature.  
-    In the left tool panel menu, under NGS Analysis, select
-    **NGS: RNA Analysis > SAM/BAM to count matrix** and set the parameters as follows:  
-    - **Gene model (GFF) file to count reads over from your current history:** genes.gtf
-    - **bam/sam file from your history:**  
-      (Select all six bam files using the shift key.)
-        - batch1-accepted_hits.bam
-        - batch2-accepted_hits.bam
-        - batch3-accepted_hits.bam
-        - chem1-accepted_hits.bam
-        - chem2-accepted_hits.bam
-        - chem3-accepted_hits.bam
-    - Use defaults for the other fields
-    - Execute
-
-2.  Examine the outputted matrix by using the **eye icon**.  
-    Each column corresponds to a sample and each row corresponds to a gene. By
-    sight, see if you can find a gene you think is differentially expressed
-    from looking at the counts.
-
-We now have a count matrix, with a count against each corresponding sample. We
-will use this matrix in later sections to calculate the differentially
-expressed genes.
-
------
-
-## Section 6: edgeR
-
-[edgeR](https://bioconductor.org/packages/release/bioc/html/edgeR.html)
-is an R package, that is used for analysing differential expression of
-RNA-Seq data and can either use exact statistical methods or generalised
-linear models.
-
-#### 1.  Generate a list of differentially expressed genes using edgeR
-In the Galaxy tool panel, under NGS Analysis, select
-**NGS: RNA > Differential_Count** and set the parameters as follows:
-
-- **Select an input matrix - rows are contigs, columns are counts for each
-  sample:** bams to DGE count matrix_htseqsams2mx.xls
-- **Title for job outputs:** Differential_Counts_edgeR
-- **Treatment Name:** Batch
-- **Select columns containing treatment:**  
-    - batch1-accepted_hits.bam
-    - batch2-accepted_hits.bam
-    - batch3-accepted_hits.bam
-- **Control Name:** Chem
-- **Select columns containing control:**  
-    - chem1-accepted_hits.bam
-    - chem2-accepted_hits.bam
-    - chem3-accepted_hits.bam
-- **Run this model using edgeR:** Run edgeR
-- Use defaults for the other fields
-- Execute
-
-#### 2.  Examine the outputs from the previous step
-1.  Examine the Differential_Counts_edgeR_topTable_edgeR.xls file by
-    clicking on the **eye icon**.
-    This file is a list of genes sorted by p-value from using EdgeR to
-    perform differential expression analysis.
-2.  Examine the Differential_Counts_edgeR.html file. This file has some
-    output logs and plots from running edgeR. If you are familiar with R,
-    you can examine the R code used for analysis by scrolling to the bottom
-    of the file, and clicking Differential_Counts.Rscript to download the
-    Rscript file.  
-    If you are curious about the statistical methods edgeR uses, you can
-    read the [edgeR user's guide at
-    Bioconductor](https://bioconductor.org/packages/release/bioc/html/edgeR.html).
-
-#### 3.  Extract the significant differentially expressed genes.  
-Under Basic Tools, click on **Filter and Sort > Filter**:
-
-- **Filter:** "Differential_Counts_edgeR_topTable_edgeR.xls"
-- **With following condition:** c6 < 0.05
-- Execute
-
-This will keep the genes that have an adjusted p-value of less
-than 0.05. There should be 55 genes in this file.
-Rename this file by clicking on the **pencil icon** of and change the name
-from "Filter on data x" to "edgeR_Significant_DE_Genes".
-
------
-
-## Section 7: How much concordance is there between methods?
+## Section 9: How much concordance is there between methods?
 
 We are interested in how similar the identified genes are between the different
 statistical methods used by Cuffdiff, edgeR, and DESeq2. We can generate a
@@ -513,7 +727,7 @@ Venn diagram to visualise the amount of overlap.
 
 You can download a shared history with all three significant gene lists by going
 to **Shared Data > Published Histories** on the top toolbar, and selecting
-the history called **GCC2016_RNA_concordance**. Then click on "Import History" on
+the history called **GAMe2017_RNA-seq_concordance**. Then click on "Import History" on
 the top right and "start using this history" to switch to the newly imported
 history.
 
@@ -539,89 +753,9 @@ to generate the Venn diagram if you want to run it yourself:
     - Execute
 
 2.  View the generated Venn diagram.
-    Agreement between the tools is good: there are 45 differentially expressed
-    genes that all three tools agree upon, and only a handful that are
-    exclusive to each tool.
-
-
------
-
-## Section 8: Degust
-
-Degust is an interactive visualiser for analysing RNA-seq data. It runs as a
-web service and can be found at [vicbioinformatics.com/degust/](http://www.vicbioinformatics.com/degust/).
-
-<img src="../media/rna_advanced_degust_1.png" height=400px style="display:block; margin-left: auto; margin-right:auto;">
-
-#### 1. Load count data into Degust
-
-1.  In Galaxy, download the count data "bams to DGE count matrix_htseqsams2mx.xls"
-    generated in Section 4 using the **disk icon**.
-2.  Go to [vicbioinformatics.com/degust/](http://www.vicbioinformatics.com/degust/)
-    and click on "Upload your counts file".
-3.  Click "Choose file" and upload the recently downloaded Galaxy tabular file
-    containing your RNA-seq counts.
-
-#### 2. Configure your uploaded data
-
-1.  Give your visualisation a name.
-2.  For the Info column, select Contig.
-3.  Add two conditions: batch and chem. For each condition, select the three
-    samples which correspond with the condition.
-4.  Click **Save changes** and view your data.
-
-\showable{Show screenshot}{hint}
-
-<img src="../media/rna_advanced_degust_2.png" height=700px style="display:block; margin-left: auto; margin-right:auto;">
-
-\endshowable
-
-#### 3. Explore your data
-
-Read through the Degust tour of features. Explore the parallel coordinates plot,
-MA plot, MDS plot, heatmap and gene list. Each is fully interactive and
-influences other portions on the display depending on what is selected.
-
-<img src="../media/rna_advanced_degust_3.png" height=400px style="display:block; margin-left: auto; margin-right:auto;">
-
-On the right side of the page is an options module which can set thresholds to
-filter genes using statistical significance or absolute-fold-change.
-
-On the left side is a dropdown box you can specify the method (Voom/Limma or
-edgeR) used to perform differential expression analysis on the data. You can
-also view the R code by clicking "Show R code" under the options module on
-the right.
-
-#### 4. Explore the demo data
-
-Degust also provides an example dataset with 4 conditions and more genes. You
-can play with the demo dataset by clicking on the "Try the demo" button on the
-Degust homepage. The demo dataset includes a column with an EC number for each
-gene. This means genes can be displayed on Kegg pathways using the module on
-the right.
-
-
-\showable{More info on PCA plots}{hint}
-
-PCA plots are useful for exploratory data analysis. Samples which are more
-similar to each other are expected to cluster together. A count matrix often
-has thousands of dimensions (one for each feature) and our PCA plot generated in
-the previous step transforms the data so the most variability is represented in principal
-components 1 and 2 (PC1 and PC2 represented by the x-axis and y-axis respectively).
-
-<img src="../media/rna_advanced_deseq2_pca.png" height=400px>
-
-Take note of the scales on the x-axis and the y-axis. The x-axis representing
-the first principal component accounts for 96% of the variance and ranges from
-approximately -6 to +6, while the y-axis ranges from approximately -1 to +1.
-
-For both conditions, the 3 replicates tend to be closer to each other than they are to replicates from the other condition.
-
-Additionally, within conditions, the lower glucose (chem) condition shows more
-variability between replicates than the higher glucose (batch) condition.
-
-\endshowable
-
+    Agreement between the tools is good: the vast majority of genes identified
+    as differentially expressed are agreed upon with all three programs, and
+    only a handful that are exclusive to each tool.
 
 -----
 
